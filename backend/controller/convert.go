@@ -18,19 +18,33 @@ func handleError(c *gin.Context, code int) {
 func ShortenURLPost(c *gin.Context) {
 	body := c.Request.Body
 	val, readError := ioutil.ReadAll(body)
-	shortenRequest := models.URL{}
+	convertRequest := models.URLConvertRequest{}
 
-	json.Unmarshal([]byte(val), &shortenRequest)
+	json.Unmarshal([]byte(val), &convertRequest)
 
-	if readError != nil || shortenRequest.Original == "" {
+	if readError != nil || convertRequest.URL == "" {
 		handleError(c, 400)
 		return
 	}
 
-	shortenRequest.Shortened = repo.ShortenURL(shortenRequest.Original)
+	c.JSON(200, gin.H{
+		"url": repo.ShortenURL(convertRequest.URL),
+	})
+}
+
+func OriginalURLPost(c *gin.Context) {
+	body := c.Request.Body
+	val, readError := ioutil.ReadAll(body)
+	convertRequest := models.URLConvertRequest{}
+
+	json.Unmarshal([]byte(val), &convertRequest)
+
+	if readError != nil || convertRequest.URL == "" {
+		handleError(c, 400)
+		return
+	}
 
 	c.JSON(200, gin.H{
-		"original":  shortenRequest.Original,
-		"shortened": shortenRequest.Shortened,
+		"url": repo.OriginalURL(convertRequest.URL),
 	})
 }

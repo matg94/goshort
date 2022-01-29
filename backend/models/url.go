@@ -1,6 +1,10 @@
 package models
 
 type URL struct {
-	Original  string `json:"original"`
-	Shortened string `json:"shortened"`
+	Original  string
+	Shortened string
+}
+
+type URLConvertRequest struct {
+	URL string `json:"url"`
 }

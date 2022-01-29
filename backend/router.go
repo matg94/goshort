@@ -6,5 +6,7 @@ import (
 )
 
 func initializeRoutes(serv *gin.Engine) {
-	serv.POST("/shorten", controller.ShortenURLPost)
+	serv.POST("/goshort", controller.ShortenURLPost)
+	serv.POST("/golong", controller.OriginalURLPost)
+	serv.GET("/:url", controller.ShortRedirect)
 }

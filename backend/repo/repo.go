@@ -14,3 +14,7 @@ func ShortenURL(originalURL string) string {
 	sha := hex.EncodeToString(hasher.Sum(nil)[:config.GetHashLength()])
 	return fmt.Sprintf("%s%s", config.GetURLPrefix(), sha)
 }
+
+func OriginalURL(shortenURL string) string {
+	return "notyetimpl.com"
+}
