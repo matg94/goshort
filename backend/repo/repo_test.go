@@ -13,7 +13,7 @@ type RepoTest struct {
 }
 
 func TestRepoShorten(t *testing.T) {
-
+	config.ReadConfig("../config/test.yaml")
 	tests := []RepoTest{
 		{"http://twitter.com", config.GetURLPrefix() + "3d28c09d"},
 		{"http://google.com", config.GetURLPrefix() + "23498856"},
@@ -30,7 +30,7 @@ func TestRepoShorten(t *testing.T) {
 }
 
 func TestRepoRetrieveOriginal(t *testing.T) {
-
+	config.ReadConfig("../config/test.yaml")
 	tests := []RepoTest{
 		{"http://twitter.com", config.GetURLPrefix() + "3d28c09d"},
 		{"http://google.com", config.GetURLPrefix() + "23498856"},
