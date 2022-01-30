@@ -7,9 +7,17 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+type RedisConfig struct {
+	maxIdle   int    `yaml:"maxIdle"`
+	maxActive int    `yaml:"maxActive"`
+	port      int    `yaml:"port"`
+	URL       string `yaml:"URL"`
+}
+
 type GoShortConfig struct {
-	URLPrefix  string `yaml:"url_prefix"`
-	HashLength int    `yaml:"hash_length"`
+	URLPrefix   string      `yaml:"url_prefix"`
+	HashLength  int         `yaml:"hash_length"`
+	RedisConfig RedisConfig `yaml:"redis"`
 }
 
 func (c *GoShortConfig) Parse(data []byte) error {
@@ -34,4 +42,20 @@ func GetURLPrefix() string {
 
 func GetHashLength() int {
 	return goShortConfig.HashLength
+}
+
+func GetRedisMaxActive() int {
+	return goShortConfig.RedisConfig.maxActive
+}
+
+func GetRedisMaxIdle() int {
+	return goShortConfig.RedisConfig.maxIdle
+}
+
+func GetRedisPort() int {
+	return goShortConfig.RedisConfig.port
+}
+
+func GetRedisURL() string {
+	return goShortConfig.RedisConfig.URL
 }
