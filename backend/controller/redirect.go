@@ -1,13 +1,12 @@
 package controller
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
+	"github.com/matg94/goshort/repo"
 )
 
 func ShortRedirect(c *gin.Context) {
-	shortnedURL := c.Param("url")
-	fmt.Println(shortnedURL)
-	c.Redirect(302, "http://google.com")
+	shortenedURL := c.Param("url")
+	originalURL := repo.OriginalURL(shortenedURL)
+	c.Redirect(302, originalURL)
 }
