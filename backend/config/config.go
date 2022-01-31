@@ -8,16 +8,16 @@ import (
 )
 
 type RedisConfig struct {
-	maxIdle   int    `yaml:"maxIdle"`
-	maxActive int    `yaml:"maxActive"`
-	port      int    `yaml:"port"`
+	MaxIdle   int    `yaml:"MaxIdle"`
+	MaxActive int    `yaml:"MaxActive"`
+	Port      int    `yaml:"Port"`
 	URL       string `yaml:"URL"`
 }
 
 type GoShortConfig struct {
-	URLPrefix   string      `yaml:"url_prefix"`
-	HashLength  int         `yaml:"hash_length"`
-	RedisConfig RedisConfig `yaml:"redis"`
+	URLPrefix  string      `yaml:"url_prefix"`
+	HashLength int         `yaml:"hash_length"`
+	RedisConf  RedisConfig `yaml:"redis"`
 }
 
 func (c *GoShortConfig) Parse(data []byte) error {
@@ -45,17 +45,17 @@ func GetHashLength() int {
 }
 
 func GetRedisMaxActive() int {
-	return goShortConfig.RedisConfig.maxActive
+	return goShortConfig.RedisConf.MaxActive
 }
 
 func GetRedisMaxIdle() int {
-	return goShortConfig.RedisConfig.maxIdle
+	return goShortConfig.RedisConf.MaxIdle
 }
 
 func GetRedisPort() int {
-	return goShortConfig.RedisConfig.port
+	return goShortConfig.RedisConf.Port
 }
 
 func GetRedisURL() string {
-	return goShortConfig.RedisConfig.URL
+	return goShortConfig.RedisConf.URL
 }

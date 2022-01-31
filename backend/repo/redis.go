@@ -12,7 +12,10 @@ type Redis struct {
 	client redis.Conn
 }
 
-func (r *Redis) Init() {
+var redisConn Redis
+
+func InitRedis() {
+	r := Redis{}
 	var pool = &redis.Pool{
 		MaxIdle:   config.GetRedisMaxIdle(),
 		MaxActive: config.GetRedisMaxActive(),
@@ -25,16 +28,19 @@ func (r *Redis) Init() {
 		},
 	}
 	r.client = pool.Get()
+	redisConn = r
 }
 
-func (r *Redis) GET(key string) interface{} {
+func (r *Redis) GET(key string) string {
+	fmt.Println("GET ", key)
 	val, err := r.client.Do("GET", key)
 	if err != nil {
 		return ""
 	}
-	return val
+	return fmt.Sprintf("%s", val)
 }
 
 func (r *Redis) SET(key string, value string) {
+	fmt.Println("SET ", key)
 	r.client.Do("SET", key, value)
 }

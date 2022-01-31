@@ -17,4 +17,14 @@ func TestConfigReadCorrectly(t *testing.T) {
 		failLog := fmt.Sprintf("Config read failed, expected URLPrefix %s, but got %s", "http://test/", GetURLPrefix())
 		t.Error(failLog)
 	}
+
+	if GetRedisPort() != 1 {
+		failLog := fmt.Sprintf("Config read failed, expected RedisPort %d, but got %d", 1, GetRedisPort())
+		t.Error(failLog)
+	}
+
+	if GetRedisURL() != "1.1.1.1" {
+		failLog := fmt.Sprintf("Config read failed, expected RedisURL %s, but got %s", "1.1.1.1", GetRedisURL())
+		t.Error(failLog)
+	}
 }
