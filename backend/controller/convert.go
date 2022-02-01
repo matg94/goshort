@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 
 	"github.com/gin-gonic/gin"
-	"github.com/matg94/goshort/models"
 	"github.com/matg94/goshort/repo"
 )
 
@@ -18,7 +17,7 @@ func handleError(c *gin.Context, code int) {
 func ShortenURLPost(c *gin.Context) {
 	body := c.Request.Body
 	val, readError := ioutil.ReadAll(body)
-	convertRequest := models.URLConvertRequest{}
+	convertRequest := URLConvertRequest{}
 
 	json.Unmarshal([]byte(val), &convertRequest)
 
@@ -35,7 +34,7 @@ func ShortenURLPost(c *gin.Context) {
 func OriginalURLPost(c *gin.Context) {
 	body := c.Request.Body
 	val, readError := ioutil.ReadAll(body)
-	convertRequest := models.URLConvertRequest{}
+	convertRequest := URLConvertRequest{}
 
 	json.Unmarshal([]byte(val), &convertRequest)
 

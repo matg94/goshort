@@ -1,4 +1,4 @@
-package models
+package controller
 
 type URL struct {
 	Original  string

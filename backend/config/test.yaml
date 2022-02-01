@@ -1,7 +1,0 @@
-url_prefix: "http://test/"
-hash_length: 4
-redis:
-  MaxIdle: 80
-  MaxActive: 12000
-  Port: 1
-  URL: "1.1.1.1"
