@@ -1,14 +1,15 @@
+import React from 'react';
 import URL from "./URL";
-import {Grid} from '@material-ui/core'
+import {Grid, Card} from '@material-ui/core'
 
-function URLResults() {
+function URLResults(props) {
 
-    const Results = ["1123","12.12.12", "1412"]
+    const Results = props.URLs
     
     return (
         <Grid
             container
-            spacing={0}
+            spacing={1}
             direction="column"
             alignItems="center"
             justify="center">

@@ -1,12 +1,13 @@
-import { MDBCol } from "mdbreact";
+import React from 'react';
 import { Card, CardContent, Button, CardActions, Typography } from '@material-ui/core'
 import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: "40vw",
-      minWidth: "20vw",
-      maxHeight: "8vh",
+      maxWidth: "80%",
+      minWidth: "80%",
+      maxHeight: "10vh",
+      minHeight: "8vh",
       margin: 5,
       display: "flex",
       justifyContent: "space-between",
@@ -15,6 +16,18 @@ const useStyles = makeStyles({
     media: {
       height: 140,
     },
+    Original: {
+        fontSize: 12,
+        justifyContent: "left"
+    },
+    Short: {
+        fontSize: 16,
+        justifyContent: "left"
+    },
+    Tag: {
+        fontSize: 12,
+        justifyContent: "right"
+    }
   });
 
 function URL(props) {
@@ -22,7 +35,8 @@ function URL(props) {
     return (
         <Card className={classes.root}>
             <CardContent>
-                <Typography display="inline" component="p" color="textPrimary">{props.val}</Typography>
+                <Typography className={classes.Short} component="p" color="textPrimary">{props.val.short}</Typography>
+                <Typography className={classes.Original} component="p" color="textSecondary">{props.val.original}</Typography>
             </CardContent>
             <CardContent>
                 <CardActions>
