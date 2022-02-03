@@ -15,7 +15,7 @@ function URLResults(props) {
             justify="center">
         {Results.map(url => {
             return  (
-                    <URL val={url}/>
+                    <URL onClick={props.handleRemoveUrl} val={url}/>
             )
         })}
         </Grid>

@@ -44,6 +44,7 @@ function URL(props) {
                         variant="outlined"
                         color="secondary"
                         size="small"
+                        onClick={() => props.onClick(props.val.short, props.val.original)}
                         >
                             Delete
                     </Button>

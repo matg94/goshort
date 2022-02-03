@@ -34,9 +34,16 @@ function TextBoxAction(props) {
   const handleInput = event => {
     setInputText(event.target.value)
   }
+  const handleRemoveUrl = (short, original) => {
+    console.log(`Handle remove! ${short} ${original}`)
+    const updatedURLS = urls.filter(
+      url => url.original != original && url.short != short
+    )
+    setUrls(updatedURLS)
+  }
   const handleSearch = () => {
     axios
-        .post("http://localhost:8080/goshort", {"url": inputText})
+        .post(`http://localhost:8080/${props.submitURL}`, {"url": inputText})
         .then(res => {
           setUrls([...urls, {
             "original": inputText,
@@ -54,7 +61,7 @@ function TextBoxAction(props) {
         <input className={classes.searchBox} type="text" placeholder={props.placeholder} onChange={handleInput} aria-label="TextBoxAction" />
         <Button className={classes.button} size="sm" variant="outlined" color="primary" onClick={handleSearch}>{props.buttonText}</Button>
       </Card>
-      <URLResults URLs={urls}></URLResults>
+      <URLResults handleRemoveUrl={handleRemoveUrl} URLs={urls}></URLResults>
     </div>
   );
 }
