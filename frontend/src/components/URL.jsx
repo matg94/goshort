@@ -46,7 +46,7 @@ function URL(props) {
                         size="small"
                         onClick={() => props.onClick(props.val.short, props.val.original)}
                         >
-                            Delete
+                            Hide
                     </Button>
                 </CardActions>
             </CardContent>
