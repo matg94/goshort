@@ -11,8 +11,16 @@ function Toolbox() {
         direction="column"
         alignItems="center"
         justify="center">
-            <TextBoxAction description="Find where a go-short url points to" submitURL="golong" placeholder="Search" buttonText="Search"></TextBoxAction>
-            <TextBoxAction description="Create a go-short url with a random link. These persist when you leave the page." submitURL="goshort" placeholder="URL to redirect to" buttonText="Create"></TextBoxAction>
+            <TextBoxAction 
+              description="Find where a go.short URL points to" 
+              submitURL="golong" 
+              placeholder="Enter Full Go.Short URL" 
+              buttonText="GO LONG"></TextBoxAction>
+            <TextBoxAction 
+              description="Shorten a URL to a go.short one" 
+              submitURL="goshort" 
+              placeholder="Enter Full URL" 
+              buttonText="GO SHORT"></TextBoxAction>
     </Grid>
   );
 }
