@@ -45,6 +45,9 @@ function TextBoxAction(props) {
     axios
         .post(`http://localhost:8080/${props.submitURL}`, {"url": inputText})
         .then(res => {
+          if (urls.filter(url => url.original == inputText && url.short == res.data.url).length > 0) {
+            return
+          }
           setUrls([...urls, {
             "original": inputText,
             "short": res.data.url,
