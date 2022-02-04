@@ -29,11 +29,11 @@ function HeaderBar(props) {
       "title": "Go Short",
       "disabled": true,    },
     {
-      "title": "Go Custom",
+      "title": "Go Long",
       "disabled": false,
     },
     {
-      "title": "Go Long",
+      "title": "Go Custom",
       "disabled": false,
     },
   ])
@@ -42,6 +42,7 @@ function HeaderBar(props) {
     newButtons.forEach(b => b.disabled = false)
     newButtons[index].disabled = true
     setButtons(newButtons)
+    props.handlePageChange(newButtons[index].title)
   }
   return (
     <Paper>

@@ -1,15 +1,11 @@
 import './App.css';
 import React from 'react';
-import URLResults from './components/URLResults';
-import HeaderBar from './pages/HeaderBar';
-import Toolbox from './components/Toolbox';
-import {Paper} from '@material-ui/core';
+import MainPage from './pages/MainPage'
 
 function App() {
   return (
     <div className="App">
-      <HeaderBar/>
-      <Toolbox></Toolbox>
+      <MainPage/>
     </div>
   );
 }
