@@ -5,11 +5,18 @@ import TextBoxAction from '../components/TextBoxAction';
 
 function GoShortPage() {
   return (
-    <TextBoxAction 
-      description="Shorten a URL to a go.short one" 
-      submitURL="goshort" 
-      placeholder="Enter Full URL" 
-      buttonText="GO SHORT"></TextBoxAction>
+    <Grid
+    container
+    spacing={0}
+    direction="column"
+    alignItems="center"
+    justify="center">
+      <TextBoxAction 
+        description="Shorten a URL to a go.short one" 
+        submitURL="goshort" 
+        placeholder="Enter Full URL" 
+        buttonText="GO SHORT"></TextBoxAction>
+    </Grid>
   );
 }
 

@@ -18,10 +18,11 @@ const useStyles = makeStyles({
   searchBox: {
     maxWidth: "68%",
     minWidth: "68%",
+    minHeight: "4vh",
     margin: "3%",
   },
   button: {
-    height: "90%",
+    height: "4vh",
     maxWidth: "18%",
     minWidth: "18%",
     margin: "3%",
