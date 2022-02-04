@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Button, makeStyles, Card, CardContent, CardActions } from "@material-ui/core";
 import URLResults from './URLResults';
+import config from '../config.json';
 
 const useStyles = makeStyles({
   root: {
@@ -44,7 +45,7 @@ function TextBoxAction(props) {
   }
   const handleSearch = () => {
     axios
-        .post(`http://localhost:8080/${props.submitURL}`, {"url": inputText})
+        .post(`${config.SERVER_URL}/${props.submitURL}`, {"url": inputText})
         .then(res => {
           if (urls.filter(url => url.original == inputText && url.short == res.data.url).length > 0) {
             return
