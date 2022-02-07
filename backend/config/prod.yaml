@@ -3,6 +3,5 @@ hash_length: 4
 redis:
   MaxIdle: 80
   MaxActive: 12000
-  Username: "default"
   Port: 25061
   URL: "goshort-redis-do-user-8711707-0.b.db.ondigitalocean.com"

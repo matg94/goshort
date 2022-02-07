@@ -23,12 +23,13 @@ func InitRedis() {
 			c, err := redis.Dial(
 				"tcp",
 				fmt.Sprintf(
-					"rediss://%s:%s@%s:%d",
-					config.GetRedisUser(),
-					config.GetRedisPassword(),
+					"%s:%d",
 					config.GetRedisURL(),
 					config.GetRedisPort(),
-				))
+				),
+				redis.DialPassword(config.GetRedisPassword()),
+				redis.DialUseTLS(true),
+			)
 			if err != nil {
 				log.Fatal(err.Error())
 			}

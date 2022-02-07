@@ -76,10 +76,6 @@ func GetRedisURL() string {
 	return goShortConfig.RedisConf.URL
 }
 
-func GetRedisUser() string {
-	return goShortConfig.RedisConf.User
-}
-
 func GetRedisPassword() string {
 	return os.Getenv("REDIS_PASSWORD")
 }
