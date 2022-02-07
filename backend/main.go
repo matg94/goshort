@@ -11,9 +11,16 @@ import (
 )
 
 func main() {
+
+	profile := os.Args[1]
+
 	server := gin.Default()
 	server.Use(cors.Default())
-	config.ReadConfig(fmt.Sprintf("config/%s.yaml", os.Args[1]))
+	if profile == "prod" {
+		config.DownloadConfig("goshort/config/prod.yaml", "config/prod.yaml")
+		fmt.Println("Config files downloaded.")
+	}
+	config.ReadConfig(fmt.Sprintf("config/%s.yaml", profile))
 	initializeRoutes(server)
 	repo.InitRedis()
 	server.Run()
