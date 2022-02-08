@@ -1,8 +1,5 @@
 url_prefix: "http://localhost:8080/"
 hash_length: 4
-config:
-  AutoUpdate: True
-  UpdateInterval: 10
 redis:
   MaxIdle: 80
   MaxActive: 12000
