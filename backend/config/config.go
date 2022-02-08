@@ -10,6 +10,11 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+type Config struct {
+	AutoUpdate     bool `yaml:"AutoUpdate"`
+	UpdateInterval int  `yaml:"UpdateInterval"`
+}
+
 type RedisConfig struct {
 	MaxIdle   int    `yaml:"MaxIdle"`
 	MaxActive int    `yaml:"MaxActive"`
@@ -22,6 +27,7 @@ type GoShortConfig struct {
 	URLPrefix  string      `yaml:"url_prefix"`
 	HashLength int         `yaml:"hash_length"`
 	RedisConf  RedisConfig `yaml:"redis"`
+	Config     Config      `yaml:"config"`
 }
 
 func (c *GoShortConfig) Parse(data []byte) error {
@@ -78,4 +84,12 @@ func GetRedisURL() string {
 
 func GetRedisPassword() string {
 	return os.Getenv("REDIS_PASSWORD")
+}
+
+func GetConfigUpdateInterval() int {
+	return goShortConfig.Config.UpdateInterval
+}
+
+func GetAutoUpdate() bool {
+	return goShortConfig.Config.AutoUpdate
 }

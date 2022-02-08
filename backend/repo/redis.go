@@ -20,16 +20,29 @@ func InitRedis() {
 		MaxIdle:   config.GetRedisMaxIdle(),
 		MaxActive: config.GetRedisMaxActive(),
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial(
-				"tcp",
-				fmt.Sprintf(
-					"%s:%d",
-					config.GetRedisURL(),
-					config.GetRedisPort(),
-				),
-				redis.DialPassword(config.GetRedisPassword()),
-				redis.DialUseTLS(true),
-			)
+			var c redis.Conn
+			var err error
+			if config.GetRedisPassword() == "" {
+				c, err = redis.Dial(
+					"tcp",
+					fmt.Sprintf(
+						"%s:%d",
+						config.GetRedisURL(),
+						config.GetRedisPort(),
+					),
+				)
+			} else {
+				c, err = redis.Dial(
+					"tcp",
+					fmt.Sprintf(
+						"%s:%d",
+						config.GetRedisURL(),
+						config.GetRedisPort(),
+					),
+					redis.DialPassword(config.GetRedisPassword()),
+					redis.DialUseTLS(true),
+				)
+			}
 			if err != nil {
 				log.Fatal(err.Error())
 			}
