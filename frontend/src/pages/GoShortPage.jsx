@@ -13,7 +13,7 @@ function GoShortPage() {
     justify="center">
       <TextBoxAction 
         description="Shorten a URL to a go.short one" 
-        submitURL="goshort" 
+        submitURL="short" 
         placeholder="Enter Full URL" 
         buttonText="GO SHORT"></TextBoxAction>
     </Grid>

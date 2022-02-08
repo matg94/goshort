@@ -13,7 +13,7 @@ function GoLongPage() {
     justify="center">
         <TextBoxAction 
         description="Find where a go.short URL points to" 
-        submitURL="golong" 
+        submitURL="long" 
         placeholder="Enter Full Go.Short URL" 
         buttonText="GO LONG"></TextBoxAction>
     </Grid>
