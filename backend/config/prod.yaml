@@ -1,4 +1,4 @@
-url_prefix: "http://localhost:8080/"
+url_prefix: "https://goshort-locnj.ondigitalocean.app/"
 hash_length: 4
 redis:
   MaxIdle: 80
