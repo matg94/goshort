@@ -56,7 +56,7 @@ func InitRedis() {
 func (r *Redis) GET(key string) string {
 	fmt.Println("GET ", key)
 	val, err := r.client.Do("GET", key)
-	if err != nil {
+	if err != nil || val == nil {
 		return ""
 	}
 	return fmt.Sprintf("%s", val)
