@@ -14,7 +14,7 @@ func ShortenURLHash(originalURL string) string {
 	hasher.Write([]byte(originalURL))
 	sha := hex.EncodeToString(hasher.Sum(nil)[:config.GetHashLength()])
 
-	if redisConn.GET(sha) == "%!s(<nil>)" {
+	if redisConn.GET(sha) == "" {
 		redisConn.SET(sha, originalURL)
 	}
 
@@ -22,7 +22,7 @@ func ShortenURLHash(originalURL string) string {
 }
 
 func ShortenURLCustom(originalURL string, shortRequest string) (string, error) {
-	if redisConn.GET(shortRequest) != "%!s(<nil>)" {
+	if redisConn.GET(shortRequest) != "" {
 		return "", fmt.Errorf("URL is already in use")
 	}
 	redisConn.SET(shortRequest, originalURL)

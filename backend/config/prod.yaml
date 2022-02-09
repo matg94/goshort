@@ -1,4 +1,4 @@
-url_prefix: "https://goshort-locnj.ondigitalocean.app/"
+url_prefix: "https://goshort-locnj.ondigitalocean.app/go/"
 hash_length: 4
 redis:
   MaxIdle: 80

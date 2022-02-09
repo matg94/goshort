@@ -48,7 +48,6 @@ function HeaderBar(props) {
     <Paper>
       {
         buttons.map((button, index) => {
-          console.log(`Creating button: ${index} : ${button.disabled}`)
           return <Button key={index} variant="text" disabled={button.disabled} onClick={() => handleOnClick(index)} color="primary" className={classes.button}>{button.title}</Button>
         })
       }
