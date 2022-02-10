@@ -1,4 +1,4 @@
-import { AppBar, Button, Paper } from '@material-ui/core';
+import { Button, Paper } from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core';

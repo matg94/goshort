@@ -1,6 +1,6 @@
 import React from 'react';
 import URL from "./URL";
-import {Grid, Card} from '@material-ui/core'
+import {Grid} from '@material-ui/core'
 
 function URLResults(props) {
 

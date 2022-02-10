@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import {NotificationContainer} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import HeaderBar from './HeaderBar';
+import HeaderBar from '../components/HeaderBar';
 import GoShortPage from './GoShortPage';
 import GoLongPage from './GoLongPage';
 import GoCustomPage from './GoCustomPage';
@@ -19,6 +19,8 @@ function MainPage() {
                 return <GoLongPage/>
             case "Go Custom":
                 return <GoCustomPage/>
+            default:
+                return <GoShortPage/>
         }
     }
 

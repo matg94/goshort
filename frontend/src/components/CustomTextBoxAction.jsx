@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { Button, makeStyles, Card, CardContent, CardActions } from "@material-ui/core";
+import { Button, makeStyles, Card, Paper } from "@material-ui/core";
 import URLResults from './URLResults';
 import config from '../config.json';
 import {NotificationManager} from 'react-notifications';
@@ -15,6 +15,13 @@ const useStyles = makeStyles({
       margin: 5,
       justifyContent: "space-between",
       alignItems: "center"
+  },
+  container: {
+    maxWidth: "60vw",
+    minWidth: "40vw",
+    maxHeight: "60vh",
+    minHeight: "40vh",
+    margin: 10,
   },
   searchBox: {
     maxWidth: "68%",
@@ -37,7 +44,7 @@ function CustomTextBoxAction(props) {
 
   const handleRemoveUrl = (short, original) => {
     const updatedURLS = urls.filter(
-      url => url.original != original && url.short != short
+      url => url.original !== original && url.short !== short
     )
     setUrls(updatedURLS)
   }
@@ -49,7 +56,7 @@ function CustomTextBoxAction(props) {
             "short": desiredURLInput
         })
         .then(res => {
-          if (urls.filter(url => url.original == originalURLInput && url.short == res.data.url).length > 0) {
+          if (urls.filter(url => url.original === originalURLInput && url.short === res.data.url).length > 0) {
             return
           }
           setUrls([...urls, {
@@ -63,27 +70,29 @@ function CustomTextBoxAction(props) {
 
   const classes = useStyles(useStyles)
   return (
-    <div>
-      <p>{props.description}</p>
-      <Card className={classes.root} elevation={1}>
-        <input 
-            className={classes.searchBox} 
-            type="text" 
-            placeholder={props.placeholderOne} 
-            onChange={(event) => setoriginalURLInput(event.target.value)}
-            aria-label="CustomTextBoxAction"
-        />
-        <input 
-            className={classes.searchBox}
-            type="text"
-            placeholder={props.placeholderTwo} 
-            onChange={(event) => setdesiredURLInput(event.target.value)}
-            aria-label="CustomTextBoxAction"
-        />
-        <Button className={classes.button} size="sm" variant="outlined" color="primary" onClick={handleSubmit}>{props.buttonText}</Button>
-      </Card>
+    <React.Fragment>
+      <Paper className={classes.container}>
+        <h4>{props.description}</h4>
+        <Card className={classes.root} elevation={0}>
+          <input 
+              className={classes.searchBox} 
+              type="text" 
+              placeholder={props.placeholderOne} 
+              onChange={(event) => setoriginalURLInput(event.target.value)}
+              aria-label="CustomTextBoxAction"
+          />
+          <input 
+              className={classes.searchBox}
+              type="text"
+              placeholder={props.placeholderTwo} 
+              onChange={(event) => setdesiredURLInput(event.target.value)}
+              aria-label="CustomTextBoxAction"
+          />
+          <Button className={classes.button} size="sm" variant="outlined" color="primary" onClick={handleSubmit}>{props.buttonText}</Button>
+        </Card>
+      </Paper>
       <URLResults handleRemoveUrl={handleRemoveUrl} URLs={urls}></URLResults>
-    </div>
+    </React.Fragment>
   );
 }
 

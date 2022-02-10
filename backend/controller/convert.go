@@ -28,8 +28,10 @@ func ShortenURLHashPost(c *gin.Context) {
 		return
 	}
 
+	shortenedURL := repo.ShortenURLHash(convertRequest.URL)
+
 	c.JSON(200, gin.H{
-		"url": repo.ShortenURLHash(convertRequest.URL),
+		"url": shortenedURL,
 	})
 }
 
@@ -74,6 +76,12 @@ func OriginalURLPost(c *gin.Context) {
 	if readError != nil || convertRequest.URL == "" {
 		handleError(c, 400, readError)
 		return
+	}
+
+	originalURL := repo.OriginalURL(convertRequest.URL)
+
+	if originalURL == "" {
+		handleError(c, 404, fmt.Errorf("URL not found"))
 	}
 
 	c.JSON(200, gin.H{
