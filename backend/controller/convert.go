@@ -28,7 +28,12 @@ func ShortenURLHashPost(c *gin.Context) {
 		return
 	}
 
-	shortenedURL := repo.ShortenURLHash(convertRequest.URL)
+	shortenedURL, err := repo.ShortenURLHash(convertRequest.URL)
+
+	if err != nil {
+		handleError(c, 500, err)
+		return
+	}
 
 	c.JSON(200, gin.H{
 		"url": shortenedURL,
@@ -57,7 +62,11 @@ func ShortenURLCustomPost(c *gin.Context) {
 	short, err := repo.ShortenURLCustom(customRequest.URL, customRequest.Short)
 
 	if err != nil {
-		handleError(c, 409, err)
+		if err.Error() == "URL is already in use" {
+			handleError(c, 409, err)
+			return
+		}
+		handleError(c, 500, err)
 		return
 	}
 

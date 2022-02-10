@@ -54,15 +54,19 @@ func InitRedis() {
 }
 
 func (r *Redis) GET(key string) string {
-	fmt.Println("GET ", key)
 	val, err := r.client.Do("GET", key)
+
 	if err != nil || val == nil {
 		return ""
 	}
 	return fmt.Sprintf("%s", val)
 }
 
-func (r *Redis) SET(key string, value string) {
-	fmt.Println("SET ", key)
-	r.client.Do("SET", key, value)
+func (r *Redis) SET(key string, value string) error {
+	fmt.Println("SET", key, "TO", value)
+	_, err := r.client.Do("SET", key, value)
+	if err != nil {
+		return err
+	}
+	return nil
 }

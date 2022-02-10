@@ -9,23 +9,31 @@ import (
 	"github.com/matg94/goshort/config"
 )
 
-func ShortenURLHash(originalURL string) string {
+func ShortenURLHash(originalURL string) (string, error) {
 	hasher := sha1.New()
 	hasher.Write([]byte(originalURL))
 	sha := hex.EncodeToString(hasher.Sum(nil)[:config.GetHashLength()])
 
 	if redisConn.GET(sha) == "" {
-		redisConn.SET(sha, originalURL)
+		err := redisConn.SET(sha, originalURL)
+		if err != nil {
+			fmt.Println("ERROR:", err)
+			return "", err
+		}
 	}
 
-	return fmt.Sprintf("%s%s", config.GetURLPrefix(), sha)
+	return fmt.Sprintf("%s%s", config.GetURLPrefix(), sha), nil
 }
 
 func ShortenURLCustom(originalURL string, shortRequest string) (string, error) {
 	if redisConn.GET(shortRequest) != "" {
 		return "", fmt.Errorf("URL is already in use")
 	}
-	redisConn.SET(shortRequest, originalURL)
+	err := redisConn.SET(shortRequest, originalURL)
+	if err != nil {
+		fmt.Println("ERROR:", err)
+		return "", err
+	}
 	return fmt.Sprintf("%s%s", config.GetURLPrefix(), shortRequest), nil
 }
 
