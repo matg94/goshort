@@ -49,12 +49,14 @@ func ShortenURLCustomPost(c *gin.Context) {
 
 	if !isValid(customRequest.Short) {
 		handleError(c, 400, fmt.Errorf("requested url does not meet requirements"))
+		return
 	}
 
 	short, err := repo.ShortenURLCustom(customRequest.URL, customRequest.Short)
 
 	if err != nil {
 		handleError(c, 409, err)
+		return
 	}
 
 	c.JSON(200, gin.H{

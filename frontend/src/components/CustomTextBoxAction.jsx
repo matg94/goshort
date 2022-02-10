@@ -10,10 +10,9 @@ const useStyles = makeStyles({
   root: {
       maxWidth: "60vw",
       minWidth: "40vw",
-      maxHeight: "15vh",
-      minHeight: "10vh",
+      maxHeight: "30vh",
+      minHeight: "20vh",
       margin: 5,
-      display: "flex",
       justifyContent: "space-between",
       alignItems: "center"
   },
@@ -25,36 +24,39 @@ const useStyles = makeStyles({
   },
   button: {
     height: "4vh",
-    maxWidth: "18%",
-    minWidth: "18%",
+    maxWidth: "30%",
+    minWidth: "30%",
     margin: "3%",
   }
 })
 
-function TextBoxAction(props) {
-  const [ inputText, setInputText ] = useState("")
+function CustomTextBoxAction(props) {
+  const [ originalURLInput, setoriginalURLInput ] = useState("")
+  const [ desiredURLInput, setdesiredURLInput ] = useState("")
   const [ urls, setUrls ] = useState([])
-  const handleInput = event => {
-    setInputText(event.target.value)
-  }
+
   const handleRemoveUrl = (short, original) => {
     const updatedURLS = urls.filter(
       url => url.original != original && url.short != short
     )
     setUrls(updatedURLS)
   }
-  const handleSearch = () => {
+
+  const handleSubmit = () => {
     axios
-        .post(`${config.SERVER_URL}/${props.submitURL}`, {"url": inputText})
+        .post(`${config.SERVER_URL}/${props.submitURL}`, {
+            "url": originalURLInput,
+            "short": desiredURLInput
+        })
         .then(res => {
-          if (urls.filter(url => url.original == inputText && url.short == res.data.url).length > 0) {
+          if (urls.filter(url => url.original == originalURLInput && url.short == res.data.url).length > 0) {
             return
           }
           setUrls([...urls, {
-            "original": inputText,
+            "original": originalURLInput,
             "short": res.data.url,
           }])
-          NotificationManager.success("", "Success!", 3000)
+          NotificationManager.success("URL Shortened", "Success!", 3000)
         })
         .catch(err => { NotificationManager.error(`${err}`, "Failed!", 5000) })
   }
@@ -64,12 +66,25 @@ function TextBoxAction(props) {
     <div>
       <p>{props.description}</p>
       <Card className={classes.root} elevation={1}>
-        <input className={classes.searchBox} type="text" placeholder={props.placeholder} onChange={handleInput} aria-label="TextBoxAction" />
-        <Button className={classes.button} size="sm" variant="outlined" color="primary" onClick={handleSearch}>{props.buttonText}</Button>
+        <input 
+            className={classes.searchBox} 
+            type="text" 
+            placeholder={props.placeholderOne} 
+            onChange={(event) => setoriginalURLInput(event.target.value)}
+            aria-label="CustomTextBoxAction"
+        />
+        <input 
+            className={classes.searchBox}
+            type="text"
+            placeholder={props.placeholderTwo} 
+            onChange={(event) => setdesiredURLInput(event.target.value)}
+            aria-label="CustomTextBoxAction"
+        />
+        <Button className={classes.button} size="sm" variant="outlined" color="primary" onClick={handleSubmit}>{props.buttonText}</Button>
       </Card>
       <URLResults handleRemoveUrl={handleRemoveUrl} URLs={urls}></URLResults>
     </div>
   );
 }
 
-export default TextBoxAction;
+export default CustomTextBoxAction;
