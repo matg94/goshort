@@ -12,9 +12,9 @@ function GoLongPage() {
     alignItems="center"
     justify="center">
         <TextBoxAction 
-        description="Find where a go.short URL points to" 
+        description="Find where a goshort URL points to" 
         submitURL="long" 
-        placeholder="Enter Full Go.Short URL" 
+        placeholder="Enter Full goshort URL" 
         buttonText="GO LONG"></TextBoxAction>
     </Grid>
   );

@@ -15,7 +15,7 @@ function GoCustomPage() {
         description="Shorten a URL to a custom go short one" 
         submitURL="custom" 
         placeholderOne="Enter Full URL" 
-        placeholderTwo="Enter Desired URL"
+        placeholderTwo="Enter Desired path"
         buttonText="GO CUSTOM"></CustomTextBoxAction>
     </Grid>
   );
