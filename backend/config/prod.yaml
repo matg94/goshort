@@ -1,7 +1,7 @@
-url_prefix: "https://goshort-locnj.ondigitalocean.app/go/"
+url_prefix: "https://goshort.matgautron.dev/go/"
 hash_length: 4
 redis:
-  MaxIdle: 80
-  MaxActive: 12000
+  MaxIdle: 10
+  MaxActive: 120
   Port: 25061
   URL: "goshort-redis-do-user-8711707-0.b.db.ondigitalocean.com"

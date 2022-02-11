@@ -9,14 +9,14 @@ import (
 )
 
 type Redis struct {
-	client redis.Conn
+	connPool *redis.Pool
 }
 
 var redisConn Redis
 
 func InitRedis() {
 	r := Redis{}
-	var pool = &redis.Pool{
+	r.connPool = &redis.Pool{
 		MaxIdle:   config.GetRedisMaxIdle(),
 		MaxActive: config.GetRedisMaxActive(),
 		Dial: func() (redis.Conn, error) {
@@ -49,12 +49,17 @@ func InitRedis() {
 			return c, err
 		},
 	}
-	r.client = pool.Get()
 	redisConn = r
 }
 
+func (r *Redis) GetConnection() redis.Conn {
+	return r.connPool.Get()
+}
+
 func (r *Redis) GET(key string) string {
-	val, err := r.client.Do("GET", key)
+	conn := r.GetConnection()
+	val, err := conn.Do("GET", key)
+	conn.Close()
 
 	if err != nil || val == nil {
 		return ""
@@ -64,7 +69,10 @@ func (r *Redis) GET(key string) string {
 
 func (r *Redis) SET(key string, value string) error {
 	fmt.Println("SET", key, "TO", value)
-	_, err := r.client.Do("SET", key, value)
+	conn := r.GetConnection()
+	_, err := conn.Do("SET", key, value)
+	conn.Close()
+
 	if err != nil {
 		return err
 	}
